@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    name: bigdata #数据库名
+    url: jdbc:mysql://127.0.0.1:3306/bigdata?serverTimezone=GMT%2B8&characterEncoding=utf-8
+    username: root
+    password: root00
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # 解决SpringBoot版本太高 与Swagger2不匹配问题
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  #mapper-locations: classpath:com.maybe.demo.mapper/xml/*.xml
+  type-aliases-package: com.yalla.common.model
+  type-handlers-package: com.yalla.common.handler
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印SQL
+    # 开启驼峰功能
+    map-underscore-to-camel-case: true
+    #解决带_ 的时候获取不到值,自动驼峰转换关闭
+#    map-underscore-to-camel-case: false
