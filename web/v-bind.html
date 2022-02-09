@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+</head>
+
+<body>
+
+<div id="app">
+    <!-- v-bind:value表示将value属性交给Vue来进行管理，也就是绑定到Vue对象 -->
+    <!-- vueValue是一个用来渲染属性值的表达式，相当于标签体中加{{}}的表达式 -->
+    <input type="text" v-bind:value="vueValue"/>
+    <input type="text" :value="vueValue"/>
+
+    <!-- 同样的表达式，在标签体内通过{{}}告诉Vue这里需要渲染； -->
+    <!-- 在HTML标签的属性中，通过v-bind:属性名="表达式"的方式告诉Vue这里要渲染 -->
+    <p>{{vueValue}}</p>
+</div>
+
+</body>
+
+<script>
+    var app = new Vue({
+        "el": "#app",
+        "data": {
+            "vueValue": "太阳当空照"
+        }
+    });
+</script>
+
+</html>

@@ -1,15 +1,18 @@
 spring:
   datasource:
-    name: bigdata #Êý¾Ý¿âÃû
+    name: bigdata #ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½
     url: jdbc:mysql://127.0.0.1:3306/bigdata?serverTimezone=GMT%2B8&characterEncoding=utf-8
     username: root
     password: root00
     driver-class-name: com.mysql.cj.jdbc.Driver
-  # ½â¾öSpringBoot°æ±¾Ì«¸ß ÓëSwagger2²»Æ¥ÅäÎÊÌâ
+  # ï¿½ï¿½ï¿½SpringBootï¿½æ±¾Ì«ï¿½ï¿½ ï¿½ï¿½Swagger2ï¿½ï¿½Æ¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates
+    suffix: .html
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
@@ -17,8 +20,8 @@ mybatis-plus:
   type-aliases-package: com.yalla.common.model
   type-handlers-package: com.yalla.common.handler
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # ´òÓ¡SQL
-    # ¿ªÆôÍÕ·å¹¦ÄÜ
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # ï¿½ï¿½Ó¡SQL
+    # ï¿½ï¿½ï¿½ï¿½ï¿½Õ·å¹¦ï¿½ï¿½
     map-underscore-to-camel-case: true
-    #½â¾ö´ø_ µÄÊ±ºò»ñÈ¡²»µ½Öµ,×Ô¶¯ÍÕ·å×ª»»¹Ø±Õ
+    #ï¿½ï¿½ï¿½ï¿½ï¿½_ ï¿½ï¿½Ê±ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Öµ,ï¿½Ô¶ï¿½ï¿½Õ·ï¿½×ªï¿½ï¿½ï¿½Ø±ï¿½
 #    map-underscore-to-camel-case: false

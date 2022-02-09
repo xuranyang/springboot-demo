@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--http://heavy_code_industry.gitee.io/code-rework/pro001-javaweb/lecture/chapter04/verse05.html-->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+</head>
+
+<body>
+
+<div id="app">
+    <h3>if</h3>
+    <!--<img v-if="flag" src="/pro03-vue/./images/one.jpg"/>-->
+    <!--<img v-if="!flag" src="/pro03-vue/./images/two.jpg"/>-->
+    <input type="text" v-model="num"/>
+    <!--<div v-if="num%2==0" style="width: 200px;height: 200px;background-color:chartreuse">&nbsp;</div>-->
+    <!--<div v-else="num%2==0" style="width: 200px;height: 200px;background-color:coral">&nbsp;</div>-->
+    <div v-show="num%2==0" style="width: 200px;height: 200px;background-color:blueviolet">&nbsp;</div>
+
+</div>
+
+</body>
+
+<script>
+    var app = new Vue({
+        "el": "#app",
+        "data": {
+            "flag": true,
+            "num": 1
+        }
+    });
+</script>
+
+</html>

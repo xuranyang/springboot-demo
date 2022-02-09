@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--http://heavy_code_industry.gitee.io/code-rework/pro001-javaweb/lecture/chapter04/verse05.html-->
+<head>
+    <meta charset="UTF-8">
+    <title>AxiosTest</title>
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!--以通过 https://unpkg.com/vuex@2.0.0 这样的方式指定特定的版本-->
+    <script src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"></script>
+</head>
+
+<body>
+
+<h1>{{ store.state.message }}</h1>
+
+<h1>Ex1</h1>
+<div id="app">
+    <button v-on:click="commonParam">普通请求参数</button>
+    <p>{{info}}</p>
+    <p>{{info.userName}}</p>
+    <p>{{info.userGender}}</p>
+    <p>{{info.userAge}}</p>
+</div>
+
+<h1>Ex2</h1>
+<div id="app2">
+    <button v-on:click="getData">发送请求</button>
+    <p>{{info}}</p>
+    <p>{{info.userName}}</p>
+    <p>{{info.userGender}}</p>
+    <p>{{info.userAge}}</p>
+
+    <!-- 对象遍历 -->
+    <div v-for="(value, key, index) in info">
+        {{ index }}. {{ key }} - {{ value }}
+    </div>
+</div>
+
+
+<h1>Ex3</h1>
+<div id="app3">
+    <input type="text" v-model:value="userName"/>
+    <input type="text" v-model:value="userPwd"/>
+
+    <button v-on:click="getData">发送请求</button>
+    <!-- 对象遍历 -->
+    <div v-for="(value, key, index) in info">
+        {{ index }}. {{ key }} - {{ value }}
+    </div>
+</div>
+
+</body>
+
+<script>
+
+    // 写法一
+    var app1 = new Vue({
+        "el": "#app",
+        "data": {
+            "info": {}
+        },
+        "methods": {
+            "commonParam": function () {
+                axios({
+                    "method": "get",
+                    "url": "http://localhost:8080/web/demo/axios_get?method=commonParam",
+                    "params": {
+                        "userName": "tom",
+                        "userPwd": "123456"
+                    }
+                }).then(function (response) {
+                    console.log(response);
+                    // console.log(response.data);
+                    app1.info = response.data;
+                }).catch(function (error) {
+                    console.log(error);         // error就是出错时服务器端返回的响应数据
+                    console.log(error.response);        // 在服务器端处理请求失败后，获取axios封装的JSON格式的响应数据对象
+                    console.log(error.response.status); // 在服务器端处理请求失败后，获取响应状态码
+                    console.log(error.response.statusText); // 在服务器端处理请求失败后，获取响应状态说明文本
+                    console.log(error.response.data);   // 在服务器端处理请求失败后，获取响应体数据
+                });
+            }
+        }
+    });
+
+    // 写法二
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            "info": {
+                "userName": null,
+                "userGender": null,
+                "userAge": null
+            }
+        },
+        methods: {
+            // : function可以省略
+            // getData: function () {
+            getData() {
+                axios.get('http://localhost:8080/web/demo/axios_get?method=commonParam', {
+                    params: {
+                        'method': 'commonParam',
+                        'userName': 'tom',
+                        'userPwd': '123456'
+                    }
+                }).then((response) => {
+                    this.info = response.data;
+                })
+            }
+        }
+    });
+
+
+    var app3 = new Vue({
+        el: '#app3',
+        data: {
+            "userName": null,
+            "userPwd": null,
+            "info": {
+                "userName": null,
+                "userGender": null,
+                "userAge": null
+            }
+        },
+        methods: {
+            // : function可以省略
+            // getData: function () {
+            getData() {
+                axios.get('http://localhost:8080/web/demo/axios_get?method=commonParam', {
+                    //params参数必写 , 如果没有参数传{}也可以
+                    params: {
+                        'method': 'commonParam',
+                        'userName': this.userName,
+                        'userPwd': this.userPwd
+                    }
+                }).then((response) => {
+                    this.info = response.data;
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }
+        }
+    });
+</script>
+
+</html>

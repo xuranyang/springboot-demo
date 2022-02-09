@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+</head>
+<body>
+<div id="div0">
+    <span>{{msg}}</span>
+</div>
+
+<div id="app">{{message}}</div>
+
+</body>
+
+<script>
+    var vue = new Vue(
+        {
+            "el": "#div0",
+            data: {
+                msg: "hello world!"
+            }
+        }
+    );
+
+
+    var argumentJson = {
+        // el用于指定Vue对象要关联的HTML元素。el就是element的缩写
+        // 通过id属性值指定HTML元素时，语法格式是：#id
+        "el": "#app",
+        // data属性设置了Vue对象中保存的数据
+        "data": {
+            "message": "Hello Vue!"
+        }
+    };
+
+    // 2.创建Vue对象，传入上面准备好的参数
+    var app = new Vue(argumentJson);
+</script>
+
+</html>

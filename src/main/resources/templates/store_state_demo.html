@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--http://heavy_code_industry.gitee.io/code-rework/pro001-javaweb/lecture/chapter04/verse05.html-->
+<head>
+    <meta charset="UTF-8">
+    <title>AxiosTest</title>
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!--以通过 https://unpkg.com/vuex@2.0.0 这样的方式指定特定的版本-->
+    <script src="https://unpkg.com/vuex@2.0.0/dist/vuex.js"></script>
+    <!-- Step1 -->
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
+
+</head>
+
+<body>
+<div id="component">
+    <p>{{count}}</p>
+</div>
+
+
+<div id="app">
+    <button v-on:click="addData">加1操作</button>
+</div>
+
+<br>
+
+<div id="app2">
+    <button v-on:click="subData">减1操作</button>
+</div>
+
+</body>
+
+
+<script>
+    var store_state = new Vue({
+        el: '#component',
+        data: {
+            count: 100,
+        }
+
+    });
+
+    var app = new Vue({
+        el: '#app',
+        methods: {
+            // 不使用vuex
+            addData() {
+                store_state.count = store_state.count + 1;
+            }
+        }
+    });
+
+    var app2 = new Vue({
+        el: '#app2',
+        methods: {
+            // 不使用vuex
+            subData() {
+                store_state.count = store_state.count - 1;
+            }
+        }
+    });
+
+</script>
+
+</html>

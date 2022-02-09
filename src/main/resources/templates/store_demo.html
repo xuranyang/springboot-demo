@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--http://heavy_code_industry.gitee.io/code-rework/pro001-javaweb/lecture/chapter04/verse05.html-->
+<head>
+    <meta charset="UTF-8">
+    <title>AxiosTest</title>
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+
+<div id="app-a">
+    <button v-on:click="getDataA">修改数据</button>
+    <p>{{sharedState.message}}</p>
+
+    <div v-for="(value, key, index) in privateState">
+        {{ index }}. {{ key }} - {{ value }}
+    </div>
+</div>
+
+<br>
+
+<div id="app-b">
+    <button v-on:click="getDataB">修改数据</button>
+    <p>{{sharedState.message}}</p>
+</div>
+
+</body>
+
+<script>
+
+    var store = {
+        debug: true,
+        state: {
+            message: 'Hello!'
+        },
+        setMessageAction(newValue) {
+            if (this.debug) console.log('setMessageAction triggered with', newValue);
+            this.state.message = newValue
+        },
+        clearMessageAction() {
+            if (this.debug) console.log('clearMessageAction triggered');
+            this.state.message = ''
+        }
+    };
+
+    // 写法二
+    var app_a = new Vue({
+        el: '#app-a',
+        data: {
+            privateState: {
+                "userGender": null,
+                "userAge": null
+            },
+            sharedState: store.state,
+        },
+        methods: {
+            // : function可以省略
+            // getData: function () {
+            getDataA() {
+                store.setMessageAction('Goodbye!');
+
+                axios.get('http://localhost:8080/web/demo/axios_get?method=commonParam', {
+                    //params参数必写 , 如果没有参数传{}也可以
+                    params: {
+                        'method': 'commonParam',
+                        'userName': this.userName,
+                        'userPwd': this.userPwd
+                    }
+                }).then((response) => {
+                    this.privateState = response.data;
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }
+        }
+    });
+
+
+    var app_b = new Vue({
+        el: '#app-b',
+        data: {
+            privateState: {},
+            sharedState: store.state,
+        },
+        methods: {
+            getDataB() {
+                store.setMessageAction('Nice!');
+            }
+        }
+    });
+
+</script>
+
+</html>
